@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  tao-dev:
+    # NVIDIAの公式PyTorchコンテナなどをベースにすると便利です
+    build: .
+    container_name: tao_dev_container
+    
+    # DooDを実現するための最も重要な設定
+    # ホストのDockerソケットをコンテナ内にマウントします
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # 作業ディレクトリをマウントして、ファイルの永続化と共有を行います
+      - .:/workspace
+      # NGC CLIの認証情報をマウントします
+      - ~/.ngc:/root/.ngc
+
+    # GPUを利用可能にするための設定
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    # コンテナを起動し続けるための設定
+    tty: true
+    stdin_open: true
