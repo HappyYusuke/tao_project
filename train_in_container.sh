@@ -10,11 +10,11 @@ docker run --rm --gpus all \
     python3 /workspace/pointpillars/scripts/train.py \
         --config-path /workspace/pointpillars/config \
         --config-name default_config \
-        results_dir=/workspace/results/test_train \
+        results_dir=/workspace/results/follow_me_train \
         dataset.data_info_path=/workspace/results/data_info \
-        dataset.data_path=/workspace/data/kitti \
-        train.num_epochs=2 \
+        dataset.data_path=/workspace/data/follow_me \
+        train.num_epochs=80 \
         train.batch_size=4 \
+        dataset.info_path='{train: [infos_training.pkl]}' \
+        key=nvidia_tao \
         dataset.data_augmentor.disable_aug_list=[gt_sampling] \
-        key=nvidia_tao
-

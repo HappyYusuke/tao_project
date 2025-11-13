@@ -1,1 +1,1 @@
-docker-compose exec tao-dev bash
+docker compose exec tao-dev bash

@@ -11,5 +11,5 @@ docker run --rm --gpus all \
         --config-path /workspace/pointpillars/config \
         --config-name default_config \
         dataset.data_path=/workspace/data/follow_me \
-        results_dir=/workspace/results \
-        dataset.data_split.train=training
+        results_dir=/workspace/results_val \
+        dataset.data_split='{test: val}'
