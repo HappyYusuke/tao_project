@@ -31,6 +31,12 @@ sudo apt install -y docker-compose
 ```
 
 ## Usage
+### ファイルツリーを作成
+### ラベルファイル変換
+### 点群ファイル変換
+### ディレクトリ名変更
+### 学習できるようにデータセットを変換
+### 学習
 Step1. イメージをビルド
 ```
 ./build_docker_container.sh
