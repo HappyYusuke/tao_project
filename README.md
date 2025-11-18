@@ -56,7 +56,7 @@ data
             └── hogehoge.bin
 </pre>
 
-**2. ラベルファイル変換 (json to txt)**
+**2. ラベルファイル変換 (json to txt)** <br>
 イメージをビルド
 ```
 ./build_docker_container.sh
@@ -79,7 +79,7 @@ data
 python3 tools/convert_json_to_kitti.py
 ```
 
-**3. 点群ファイル変換 (pcd to bin)**
+**3. 点群ファイル変換 (pcd to bin)** <br>
 `convert_pcd_to_bin.py`を使用します。<br>
 引数は以下の通り。
 | 引数 | 初期値 | 内容 |
@@ -92,7 +92,7 @@ python3 tools/convert_json_to_kitti.py
 convert_pcd_to_bin.py
 ```
 
-**4. ディレクトリ名変更**
+**4. ディレクトリ名変更** <br>
 変換したファイルのディレクトリ名を`lidar`と`label`に変更
 ```bash
 rm -r label/ lidar/
@@ -100,7 +100,7 @@ mv bin/ lidar
 mv txt/ label
 ```
 
-**5. 学習できるようにデータセットを変換**
+**5. 学習できるようにデータセットを変換** <br>
 NVIDIA TAO Toolkitで学習できるようにデータセットを変換
 ```bash
 ./dataset_convert_in_container.sh
