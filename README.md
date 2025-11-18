@@ -8,6 +8,18 @@ NVIDIA TAO Toolkitを使って、PointPillarsを学習させるためのリポ�
   > NVIDIA TAO Toolkitを使用したPointPillars
 * dataディレクトリ
   > データセット配置用ディレクトリフォーマットは以下を参照
+
+## Installation
+docker-composeコマンドをインストールする
+```
+sudo apt install -y docker-compose
+```
+
+## Usage
+### Preprocessing
+**1. ファイルツリーを作成** <br>
+本リポジトリの`data`ディレクトリに以下のようなファイルツリーを作成してください。
+
 <pre>
 data
 └── kitti
@@ -24,19 +36,15 @@ data
             └── hogehoge.bin
 </pre>
 
-## Installation
-docker-composeコマンドをインストールする
-```
-sudo apt install -y docker-compose
-```
+**2. ラベルファイル変換**
 
-## Usage
-### ファイルツリーを作成
-### ラベルファイル変換
-### 点群ファイル変換
-### ディレクトリ名変更
-### 学習できるようにデータセットを変換
-### 学習
+**3. 点群ファイル変換**
+
+**4. ディレクトリ名変更**
+
+**5. 学習できるようにデータセットを変換**
+
+### Training
 Step1. イメージをビルド
 ```
 ./build_docker_container.sh
