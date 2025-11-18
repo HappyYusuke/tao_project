@@ -14,8 +14,22 @@ NVIDIA TAO Toolkitを使って、PointPillarsを学習させるためのリポ�
 <br>
 
 # Installation
-docker-composeコマンドをインストールする
+本リポジトリをクローン
+```bash
+git clone https://github.com/HappyYusuke/tao_project.git
 ```
+
+Dockerをインストール（インストールしている場合はスキップ）
+```bash
+# 本リポジトリに移動
+cd ~/tao_project
+
+# Dockerをインストール
+./install-docker.sh
+```
+
+docker-composeをインストール
+```bash
 sudo apt install -y docker-compose
 ```
 
