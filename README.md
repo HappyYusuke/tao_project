@@ -1,4 +1,4 @@
-# Discription
+# tao_project
 NVIDIA TAO Toolkitを使って、PointPillarsを学習させるためのリポジトリ。
 
 内容
@@ -9,11 +9,15 @@ NVIDIA TAO Toolkitを使って、PointPillarsを学習させるためのリポ�
 * dataディレクトリ
   > データセット配置用ディレクトリフォーマットは以下を参照
 
+<br>
+
 # Installation
 docker-composeコマンドをインストールする
 ```
 sudo apt install -y docker-compose
 ```
+
+<br>
 
 # Usage
 ## Preprocessing
@@ -80,6 +84,8 @@ Step5. 終了
 ```
 stop_docker_compose.sh
 ```
+
+<br>
 
 # TODO
 * `convert_json_to_kitti.py`を`convert_json_to_txt.py`にファイル名変更
