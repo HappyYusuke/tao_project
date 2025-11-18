@@ -82,4 +82,5 @@ stop_docker_compose.sh
 ```
 
 # TODO
-convert_json_to_kitti.py
+* `convert_json_to_kitti.py`を`convert_json_to_txt.py`にファイル名変更
+* `convert_json_to_kitti.py`と`convert_pcd_to_bin.py`でディレクトリ名変更の手順をなくす
