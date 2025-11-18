@@ -41,8 +41,18 @@ data
 </pre>
 
 **2. ラベルファイル変換**
+イメージをビルド
+```
+./build_docker_container.sh
+```
+
+コンテナを起動 (プロンプトが`root@hoge:workspace#`になります)
+```
+./run_docker_compose.sh
+```
+
 ```bash
-convert_json_to_kitti.py
+python3 tools/convert_json_to_kitti.py
 ```
 
 **3. 点群ファイル変換**
@@ -58,29 +68,17 @@ mv txt/ label
 ```
 
 **5. 学習できるようにデータセットを変換**
+```bash
+./dataset_convert_in_container.sh
+```
 
 ## Training
-Step1. イメージをビルド
-```
-./build_docker_container.sh
-```
-
-Step2. コンテナを起動
-```
-./run_docker_compose.sh
-```
-
-Step3. データセットの変換
-```
-./dataset_convert_container.sh
-```
-
-Step4. 学習
+学習
 ```
 train_in_container.sh
 ```
 
-Step5. 終了
+終了
 ```
 stop_docker_compose.sh
 ```
