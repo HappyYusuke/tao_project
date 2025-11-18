@@ -1,17 +1,23 @@
+import argparse
 import numpy as np
 import os
 from pathlib import Path
 import time
 
-# --- 1. 設定：ご自身の環境に合わせてパスを編集してください ---
+# --- 1. 引数 ---
 
-# 変換したい .pcd ファイルが格納されているディレクトリ
-# (例: /home/demulab-kohei/tao_project/my_dataset_pcd/train)
-PCD_DIR = Path("/workspace/data/follow_me/val/lidar")
+parser = argparse.ArgumentParser()
+parser.add_argument("-p", "--pcd", type=str, help="Your pcd path.")
+parser.add_argument("-b", "--bin", type=str, default='txt', help="Save directory name.")
+args = parser.parse_args()
 
-# 変換後の .bin ファイルを保存するディレクトリ
-# (例: /home/demulab-kohei/tao_project/data/kitti/training/lidar)
-BIN_DIR = Path("/workspace/data/follow_me/val/bin")
+# ★ (A) ご自身のJSONラベルが保存されているディレクトリのパス
+# (例: /home/demulab-kohei/tao_project/my_dataset_json/train)
+JSON_DIR = args.json
+
+# ★ (B) 変換後の.txtファイルを保存するディレクトリのパス
+# (TAOが探す '.../train/label' の場所を指定します)
+OUTPUT_DIR = args.txt
 
 # ---------------------------------------------------------
 
