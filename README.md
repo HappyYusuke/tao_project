@@ -7,7 +7,9 @@ NVIDIA TAO Toolkitを使って、PointPillarsを学習させるためのリポ�
 * pointpillarsディレクトリ
   > NVIDIA TAO Toolkitを使用したPointPillars
 * dataディレクトリ
-  > データセット配置用ディレクトリフォーマットは以下を参照
+  > データセット配置用ディレクト
+* toolsディレクトリ
+  > 点群ファイルとラベルファイルを変換するプログラムあり
 
 <br>
 
