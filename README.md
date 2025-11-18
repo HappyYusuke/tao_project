@@ -1,4 +1,4 @@
-## Discription
+# Discription
 NVIDIA TAO Toolkitを使って、PointPillarsを学習させるためのリポジトリ。
 
 内容
@@ -9,14 +9,14 @@ NVIDIA TAO Toolkitを使って、PointPillarsを学習させるためのリポ�
 * dataディレクトリ
   > データセット配置用ディレクトリフォーマットは以下を参照
 
-## Installation
+# Installation
 docker-composeコマンドをインストールする
 ```
 sudo apt install -y docker-compose
 ```
 
-## Usage
-### Preprocessing
+# Usage
+## Preprocessing
 **1. ファイルツリーを作成** <br>
 本リポジトリの`data`ディレクトリに以下のようなファイルツリーを作成してください。
 
@@ -37,14 +37,25 @@ data
 </pre>
 
 **2. ラベルファイル変換**
+```bash
+convert_json_to_kitti.py
+```
 
 **3. 点群ファイル変換**
+```bash
+convert_pcd_to_bin.py
+```
 
 **4. ディレクトリ名変更**
+```bash
+rm -r label/ lidar/
+mv bin/ lidar
+mv txt/ label
+```
 
 **5. 学習できるようにデータセットを変換**
 
-### Training
+## Training
 Step1. イメージをビルド
 ```
 ./build_docker_container.sh
@@ -69,3 +80,6 @@ Step5. 終了
 ```
 stop_docker_compose.sh
 ```
+
+# TODO
+convert_json_to_kitti.py
