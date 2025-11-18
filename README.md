@@ -56,7 +56,7 @@ data
             └── hogehoge.bin
 </pre>
 
-**2. ラベルファイル変換**
+**2. ラベルファイル変換 (json to txt)**
 イメージをビルド
 ```
 ./build_docker_container.sh
@@ -67,12 +67,26 @@ data
 ./run_docker_compose.sh
 ```
 
+`convert_json_to_txt.py`を使用します。<br>
+引数は以下の通り。
+| 引数 | 初期値 | 内容 |
+| --- | --- | --- |
+| `-j` or `--json` | - | jsonファイルが格納されているディレクトリまでのパスを指定。 |
+| `-t` or `--txt` | `txt` | 保存するディレクトリ名またはパスを指定。 |
+
 `convert_json_to_kitti.py`のパスを変更しプログラムを実行。
 ```bash
 python3 tools/convert_json_to_kitti.py
 ```
 
-**3. 点群ファイル変換**
+**3. 点群ファイル変換 (pcd to bin)**
+`convert_pcd_to_bin.py`を使用します。<br>
+引数は以下の通り。
+| 引数 | 初期値 | 内容 |
+| --- | --- | --- |
+| `-p` or `--pcd` | - | pcdファイルが格納されているディレクトリまでのパスを指定。 |
+| `-b` or `--bin` | `bin` | 保存するディレクトリ名またはパスを指定。 |
+
 `convert_pcd_to_bin.py`のパスを変更しプログラムを実行。
 ```bash
 convert_pcd_to_bin.py
@@ -106,5 +120,4 @@ stop_docker_compose.sh
 <br>
 
 # TODO
-* `convert_json_to_kitti.py`を`convert_json_to_txt.py`にファイル名変更
 * `convert_json_to_kitti.py`と`convert_pcd_to_bin.py`でディレクトリ名変更の手順をなくす
