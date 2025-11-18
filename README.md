@@ -46,7 +46,7 @@ data
 ./build_docker_container.sh
 ```
 
-コンテナを起動 (プロンプトが`root@hoge:workspace#`になります)
+コンテナを起動 (プロンプトが`root@hoge:/workspace#`になります)
 ```
 ./run_docker_compose.sh
 ```
