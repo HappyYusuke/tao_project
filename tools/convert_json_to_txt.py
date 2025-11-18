@@ -6,6 +6,7 @@
 KITTI形式の .txt ラベルファイルに変換するスクリプトです。
 
 クラス名の不一致 (例: "person" -> "Pedestrian") をマッピングする機能が含まれています。
+出力ディレクトリが既に存在する場合、自動的にナンバリングを行います。
 """
 
 import argparse
@@ -14,29 +15,46 @@ from pathlib import Path
 import os
 import time
 
+# --- 関数: ユニークなディレクトリ名を取得する ---
+def get_unique_directory(path: Path) -> Path:
+    """
+    指定されたディレクトリが存在する場合、末尾に数字(1, 2, ...)をつけて
+    重複しないディレクトリ名を生成して返す。
+    存在しなければそのまま返す。
+    """
+    # まだ存在しないならそのまま使う
+    if not path.exists():
+        return path
 
+    # 存在する場合、数字をつけて探索する
+    counter = 1
+    while True:
+        # 親ディレクトリ / (元の名前 + 数字)
+        new_path = path.parent / f"{path.name}{counter}"
+        if not new_path.exists():
+            return new_path
+        counter += 1
 
-# --- 1. 引数 ---
+# --- 1. 引数と設定 ---
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-j", "--json", type=str, help="Your json path.")
+parser.add_argument("-j", "--json", type=str, required=True, help="Your json path.")
 parser.add_argument("-t", "--txt", type=str, default='txt', help="Save directory name.")
 args = parser.parse_args()
 
-# ★ (A) ご自身のJSONラベルが保存されているディレクトリのパス
-# (例: /home/demulab-kohei/tao_project/my_dataset_json/train)
-JSON_DIR = args.json
+# ★ (A) 入力: JSONディレクトリ
+JSON_DIR = Path(args.json)
 
-# ★ (B) 変換後の.txtファイルを保存するディレクトリのパス
-# (TAOが探す '.../train/label' の場所を指定します)
-OUTPUT_DIR = args.txt
+# ★ (B) 出力: 保存ディレクトリ (自動ナンバリング処理)
+# 引数で指定されたパスを元に、重複しないパスを取得します
+base_output_dir = Path(args.txt)
+OUTPUT_DIR = get_unique_directory(base_output_dir)
 
-# ★ (C) クラス名のマッピング (ご自身のJSON -> TAOの期待する名前)
-# これが RecursionError を解決する鍵となります。
+# ★ (C) クラス名のマッピング
 CLASS_MAPPING = {
-    "person": "Pedestrian",  # "person" を "Pedestrian" に変換
-    # "car": "Car",          # (例) もし "car" というカテゴリがあれば
-    # "bicycle": "Cyclist"   # (例)
+    "person": "Pedestrian",
+    # "car": "Car",
+    # "bicycle": "Cyclist"
 }
 # ---------------------------------------------------------
 
@@ -58,8 +76,6 @@ def convert_json_to_kitti_txt(json_path, output_path, class_mapping):
         
         # --- 1. カテゴリの抽出とマッピング ---
         original_category = label.get("category", "DontCare")
-        # マッピング辞書を使ってカテゴリ名を変換
-        # もしマッピングになければ、元の名前をそのまま使う
         mapped_category = class_mapping.get(original_category, original_category)
 
         # --- 2. 3Dボックス情報の抽出 ---
@@ -82,14 +98,12 @@ def convert_json_to_kitti_txt(json_path, output_path, class_mapping):
         ry = orientation.get("rotationYaw", 0.0)
         
         # --- 3. KITTI形式の16カラムを作成 ---
-        # JSONに存在しない値は、KITTIの標準的なデフォルト値で埋めます
-        
         line_data = [
-            mapped_category,  # 1. type (★マッピング適用済み)
-            0.0,              # 2. truncated (不明なため0)
-            0,                # 3. occluded (不明なため0)
-            -10.0,            # 4. alpha (観測角, 不明なため-10)
-            0.0, 0.0, 0.0, 0.0, # 5-8. bbox (2D BBox, 不明なため0)
+            mapped_category,  # 1. type
+            0.0,              # 2. truncated
+            0,                # 3. occluded
+            -10.0,            # 4. alpha
+            0.0, 0.0, 0.0, 0.0, # 5-8. bbox
             h,                # 9. dim_h
             w,                # 10. dim_w
             l,                # 11. dim_l
@@ -97,10 +111,9 @@ def convert_json_to_kitti_txt(json_path, output_path, class_mapping):
             y,                # 13. loc_y
             z,                # 14. loc_z
             ry,               # 15. rotation_y
-            1.0               # 16. score (Ground Truthなので1.0)
+            1.0               # 16. score
         ]
         
-        # すべての値を文字列に変換してスペースで連結
         output_lines.append(" ".join(map(str, line_data)))
 
     # 変換した内容を.txtファイルに書き込み
@@ -114,25 +127,28 @@ def convert_json_to_kitti_txt(json_path, output_path, class_mapping):
 
 # --- メインの実行処理 ---
 if __name__ == "__main__":
-    # 出力ディレクトリが存在しない場合は作成
+    
+    # 1. JSONディレクトリのチェック
+    if not JSON_DIR.exists():
+        print(f"エラー: 入力ディレクトリが見つかりません: {JSON_DIR}")
+        exit(1)
+        
+    json_files = list(JSON_DIR.glob("*.json"))
+    if not json_files:
+        print(f"エラー: {JSON_DIR} に .json ファイルが見つかりません。")
+        exit(1)
+
+    # 2. 出力ディレクトリの作成 (ここでユニーク化されたパスを使用)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     
     print(f"TAO PointPillars KITTI形式 変換スクリプト")
     print("-" * 40)
     print(f"入力 (JSON) : {JSON_DIR}")
-    print(f"出力 (.txt)  : {OUTPUT_DIR}")
-    print(f"マッピング   : {CLASS_MAPPING}")
+    print(f"出力 (.txt) : {OUTPUT_DIR}  <-- このフォルダに保存されます")
+    print(f"マッピング  : {CLASS_MAPPING}")
     print("-" * 40)
 
     start_time = time.time()
-    
-    json_files = list(JSON_DIR.glob("*.json"))
-    
-    if not json_files:
-        print(f"エラー: {JSON_DIR} に .json ファイルが見つかりません。")
-        print("スクリプト上部の `JSON_DIR` のパスを確認してください。")
-        exit()
-        
     print(f"{len(json_files)} 件の .json ファイルを変換します...")
     
     success_count = 0
@@ -151,4 +167,5 @@ if __name__ == "__main__":
     end_time = time.time()
     print("-" * 40)
     print(f"変換完了！ (成功: {success_count} / {len(json_files)} 件)")
+    print(f"保存先: {OUTPUT_DIR}")
     print(f"所要時間: {end_time - start_time:.2f} 秒")
