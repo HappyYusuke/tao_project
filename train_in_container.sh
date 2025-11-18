@@ -15,6 +15,7 @@ docker run --rm --gpus all \
         dataset.data_path=/workspace/data/follow_me \
         train.num_epochs=80 \
         train.batch_size=4 \
-        dataset.info_path='{train: [infos_training.pkl]}' \
+        dataset.info_path='{train: [infos_train.pkl]}' \
         key=nvidia_tao \
         dataset.data_augmentor.disable_aug_list=[gt_sampling] \
+        dataset.point_cloud_range='[-69.12, -39.68, -3, 69.12, 39.68, 1]'
