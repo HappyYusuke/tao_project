@@ -51,16 +51,19 @@ data
 ./run_docker_compose.sh
 ```
 
+`convert_json_to_kitti.py`のパスを変更しプログラムを実行。
 ```bash
 python3 tools/convert_json_to_kitti.py
 ```
 
 **3. 点群ファイル変換**
+`convert_pcd_to_bin.py`のパスを変更しプログラムを実行。
 ```bash
 convert_pcd_to_bin.py
 ```
 
 **4. ディレクトリ名変更**
+変換したファイルのディレクトリ名を`lidar`と`label`に変更
 ```bash
 rm -r label/ lidar/
 mv bin/ lidar
@@ -68,6 +71,7 @@ mv txt/ label
 ```
 
 **5. 学習できるようにデータセットを変換**
+NVIDIA TAO Toolkitで学習できるようにデータセットを変換
 ```bash
 ./dataset_convert_in_container.sh
 ```
