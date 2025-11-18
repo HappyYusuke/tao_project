@@ -77,7 +77,11 @@ data
 
 `convert_json_to_kitti.py`のパスを変更しプログラムを実行。
 ```bash
-python3 tools/convert_json_to_kitti.py
+# toolsに移動する
+cd tools
+
+# プログラム実行
+python3 convert_json_to_kitti.py -j /path/to/your/json_dir
 ```
 
 **3. 点群ファイル変換 (pcd to bin)** <br>
@@ -90,7 +94,7 @@ python3 tools/convert_json_to_kitti.py
 
 `convert_pcd_to_bin.py`のパスを変更しプログラムを実行。
 ```bash
-convert_pcd_to_bin.py
+python3 convert_pcd_to_bin.py -p /path/to/your/pcd_dir
 ```
 
 **4. ディレクトリ名変更** <br>
