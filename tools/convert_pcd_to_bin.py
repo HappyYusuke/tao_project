@@ -8,7 +8,7 @@ import time
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-p", "--pcd", type=str, help="Your pcd path.")
-parser.add_argument("-b", "--bin", type=str, default='txt', help="Save directory name.")
+parser.add_argument("-b", "--bin", type=str, default='bin', help="Save directory name.")
 args = parser.parse_args()
 
 # ★ (A) ご自身のJSONラベルが保存されているディレクトリのパス
