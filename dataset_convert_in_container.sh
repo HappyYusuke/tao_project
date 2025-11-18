@@ -12,4 +12,3 @@ docker run --rm --gpus all \
         --config-name default_config \
         dataset.data_path=/workspace/data/follow_me \
         results_dir=/workspace/results \
-        dataset.data_split.train=training
