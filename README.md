@@ -38,7 +38,7 @@ sudo apt install -y docker-compose
 # Usage
 ## Preprocessing
 **1. ファイルツリーを作成** <br>
-本リポジトリの`data`ディレクトリに以下のようなファイルツリーを作成してください。
+本リポジトリの`data`ディレクトリに以下のようなファイルツリーを作成してください (`kitti`の部分は任意のディレクトリ名です)。
 
 <pre>
 data
