@@ -13,15 +13,15 @@ data
 └── kitti
     ├── train
     │   ├── label
-    │   │   ├── hogehoge.txt
+    │   │   └── hogehoge.txt
     │   │
     │   └── lidar
-    │       ├── hogehoge.bin
+    │       └── hogehoge.bin
     └── val
         ├── label
-        │   ├── hogehoge.txt
+        │   └── hogehoge.txt
         └── lidar
-            ├── hogehoge.bin
+            └── hogehoge.bin
 </pre>
 
 ## Installation
