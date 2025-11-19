@@ -1,5 +1,27 @@
 #!/bin/bash
 
+# ==============================================================================
+#  TAO PointPillars データ変換実行スクリプト (KITTI形式 -> .pkl)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. パス設定
+# ------------------------------------------------------------------------------
+
+# 変換元のデータセットがある親フォルダ
+DATA_PATH="/workspace/data/follow_me"
+
+# 変換結果(.pklファイル)の保存先
+RESULTS_DIR="/workspace/results"
+
+# ------------------------------------------------------------------------------
+# 2. 実行コマンド
+# ------------------------------------------------------------------------------
+
+echo "Start convert..."
+echo "DATA: $DATA_PATH"
+echo "SAVE: $RESULTS_DIR"
+
 docker run --rm --gpus all \
     --ipc=host \
     --ulimit memlock=-1 \
@@ -10,5 +32,5 @@ docker run --rm --gpus all \
     python3 /workspace/pointpillars/scripts/dataset_convert.py \
         --config-path /workspace/pointpillars/config \
         --config-name default_config \
-        dataset.data_path=/workspace/data/follow_me \
-        results_dir=/workspace/results \
+        dataset.data_path=${DATA_PATH} \
+        results_dir=${RESULTS_DIR}
