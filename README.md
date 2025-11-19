@@ -108,7 +108,7 @@ python3 convert_pcd_to_bin.py -p /path/to/your/pcd_dir
 <br>
 
 **4. ディレクトリ名変更** <br>
-変換したファイルのディレクトリ名を`lidar`と`label`に変更
+変換したファイルのディレクトリ名を[ファイルツリー](#1.-ファイルツリーを作成)に合わせ`lidar`と`label`に変更
 ```bash
 rm -r label/ lidar/
 mv bin/ lidar
