@@ -81,13 +81,13 @@ data
 | `-j` or `--json` | - | jsonファイルが格納されているディレクトリまでのパスを指定。 |
 | `-t` or `--txt` | `txt` | 保存するディレクトリ名またはパスを指定。 |
 
-`convert_json_to_kitti.py`のパスを変更しプログラムを実行。
+`convert_json_to_txt.py`のパスを変更しプログラムを実行。
 ```bash
 # toolsに移動する
 cd tools
 
 # プログラム実行
-python3 convert_json_to_kitti.py -j /path/to/your/json_dir
+python3 convert_json_to_txt.py -j /path/to/your/json_dir
 ```
 
 <br>
