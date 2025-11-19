@@ -149,7 +149,7 @@ vim train_in_container.sh
 <br>
 
 ## Evaluate
-**1. 検証用にデータセットを変換**
+**1. 検証用にデータセットを変換** <br>
 ファイル内の引数を環境に合わせて書き換える。
 ```bash
 vim dataset_convert_val.sh
@@ -162,7 +162,7 @@ NVIDIA TAO Toolkitで検証できるようにデータセットを変換。
 
 <br>
 
-**2. 検証**
+**2. 検証** <br>
 ファイル内の引数を環境に合わせて書き換える。
 ```bash
 vim evaluate_in_container.sh
