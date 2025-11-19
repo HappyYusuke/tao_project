@@ -114,15 +114,12 @@ NVIDIA TAO Toolkitで学習できるようにデータセットを変換
 ## Training
 学習
 ```
-train_in_container.sh
+./train_in_container.sh
 ```
 
 終了
 ```
-stop_docker_compose.sh
+./stop_docker_compose.sh
 ```
 
 <br>
-
-# TODO
-* `convert_json_to_kitti.py`と`convert_pcd_to_bin.py`でディレクトリ名変更の手順をなくす
