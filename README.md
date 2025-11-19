@@ -47,10 +47,14 @@ data
     ├── train
     │   ├── label
     │   │   └── hogehoge.txt
-    │   │
     │   └── lidar
     │       └── hogehoge.bin
-    └── val
+    ├── val
+    │   ├── label
+    │   │   └── hogehoge.txt
+    │   └── lidar
+    │       └── hogehoge.bin
+    └── test
         ├── label
         │   └── hogehoge.txt
         └── lidar
@@ -106,7 +110,12 @@ mv txt/ label
 ```
 
 **5. 学習できるようにデータセットを変換** <br>
-NVIDIA TAO Toolkitで学習できるようにデータセットを変換
+ファイル内の引数を環境に合わせて書き換える。
+```bash
+vim dataset_convert_in_container.sh
+```
+
+NVIDIA TAO Toolkitで学習できるようにデータセットを変換。
 ```bash
 ./dataset_convert_in_container.sh
 ```
