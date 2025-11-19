@@ -9,10 +9,10 @@
 # ------------------------------------------------------------------------------
 
 # 変換元のデータセットがある親フォルダ
-DATA_PATH="/workspace/data/follow_me"
+DATA_PATH="/workspace/data/your_data"
 
 # 変換結果(.pklファイル)の保存先
-RESULTS_DIR="/workspace/results"
+RESULTS_DIR="/workspace/convert_results/train"
 
 # ------------------------------------------------------------------------------
 # 2. 実行コマンド

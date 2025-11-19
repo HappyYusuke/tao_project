@@ -9,17 +9,17 @@
 # ------------------------------------------------------------------------------
 
 # 評価に使用するデータセットの場所 (trainingとvalが含まれる親フォルダ)
-DATA_PATH="/workspace/data/follow_me"
+DATA_PATH="/workspace/data/your_data"
 
 # 評価結果の保存先 (学習結果とは別の場所を指定すると管理しやすいです)
-RESULTS_DIR="/workspace/results/follow_me_eval"
+RESULTS_DIR="/workspace/results/your_data_eval"
 
 # データ変換で作成した中間ファイル(.pkl)がある場所
-DATA_INFO_PATH="/workspace/results/data_info"
+DATA_INFO_PATH="/workspace/convert_results/eval/data_info"
 
 # ★評価したいモデルファイル(.tlt)のパス
 # 学習結果フォルダの中にある、最も性能が良かったエポックのファイルを指定します
-CHECKPOINT_PATH="/workspace/results/follow_me_train/checkpoint_epoch_80.tlt"
+CHECKPOINT_PATH="/workspace/results/your_data_train/checkpoint_epoch_80.tlt"
 
 # ------------------------------------------------------------------------------
 # 2. 評価パラメータ設定

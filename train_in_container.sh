@@ -9,13 +9,13 @@
 # ------------------------------------------------------------------------------
 
 # 学習データの元フォルダ
-DATA_PATH="/workspace/data/follow_me"
+DATA_PATH="/workspace/data/your_data"
 
 # 学習結果の保存先 
-RESULTS_DIR="/workspace/results/follow_me_train"
+RESULTS_DIR="/workspace/results/your_data_train"
 
 # データ変換で作成した中間ファイル(.pkl)がある場所
-DATA_INFO_PATH="/workspace/results/data_info"
+DATA_INFO_PATH="/workspace/convert_result/train/data_info"
 
 # ------------------------------------------------------------------------------
 # 2. 学習パラメータ設定
