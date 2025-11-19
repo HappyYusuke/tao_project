@@ -61,6 +61,8 @@ data
             └── hogehoge.bin
 </pre>
 
+<br>
+
 **2. ラベルファイル変換 (json to txt)** <br>
 イメージをビルド
 ```
@@ -88,6 +90,8 @@ cd tools
 python3 convert_json_to_kitti.py -j /path/to/your/json_dir
 ```
 
+<br>
+
 **3. 点群ファイル変換 (pcd to bin)** <br>
 `convert_pcd_to_bin.py`を使用します。<br>
 引数は以下の通り。
@@ -101,6 +105,8 @@ python3 convert_json_to_kitti.py -j /path/to/your/json_dir
 python3 convert_pcd_to_bin.py -p /path/to/your/pcd_dir
 ```
 
+<br>
+
 **4. ディレクトリ名変更** <br>
 変換したファイルのディレクトリ名を`lidar`と`label`に変更
 ```bash
@@ -108,6 +114,8 @@ rm -r label/ lidar/
 mv bin/ lidar
 mv txt/ label
 ```
+
+<br>
 
 **5. 学習できるようにデータセットを変換** <br>
 ファイル内の引数を環境に合わせて書き換える。
@@ -119,6 +127,8 @@ NVIDIA TAO Toolkitで学習できるようにデータセットを変換。
 ```bash
 ./dataset_convert_in_container.sh
 ```
+
+<br>
 
 ## Training
 学習
