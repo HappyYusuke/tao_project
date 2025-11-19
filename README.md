@@ -131,14 +131,49 @@ NVIDIA TAO Toolkitで学習できるようにデータセットを変換。
 <br>
 
 ## Training
-学習
+ファイル内の引数を環境に合わせて書き換える。
+```bash
+vim train_in_container.sh
 ```
+
+学習
+```bash
 ./train_in_container.sh
 ```
 
 終了
-```
+```bash
 ./stop_docker_compose.sh
 ```
 
 <br>
+
+## Evaluate
+**1. 検証用にデータセットを変換**
+ファイル内の引数を環境に合わせて書き換える。
+```bash
+vim dataset_convert_val.sh
+```
+
+NVIDIA TAO Toolkitで検証できるようにデータセットを変換。
+```bash
+./dataset_convert_in_val.sh
+```
+
+<br>
+
+**2. 検証**
+ファイル内の引数を環境に合わせて書き換える。
+```bash
+vim evaluate_in_container.sh
+```
+
+検証
+```bash
+./evaluate_in_container.sh
+```
+
+終了
+```bash
+./stop_docker_compose.sh
+```
