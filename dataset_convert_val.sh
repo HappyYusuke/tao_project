@@ -13,7 +13,7 @@ DATA_PATH="/workspace/data/your_data"
 
 # 変換結果(.pklファイル)の保存先
 # ※ 訓練用と混ざらないように _val を付けて区別しています
-RESULTS_DIR="/workspace/convert_results/eval"
+RESULTS_DIR="/workspace/convert_result/eval"
 
 # ------------------------------------------------------------------------------
 # 2. 実行コマンド
@@ -27,8 +27,8 @@ docker run --rm --gpus all \
     --ipc=host \
     --ulimit memlock=-1 \
     --ulimit stack=67108864 \
-    -v /home/demulab-kohei/tao_project:/workspace \
-    -v /home/demulab-kohei/.ngc:/root/.ngc \
+    -v ${HOME}/tao_project:/workspace \
+    -v ${HOME}/.ngc:/root/.ngc \
     nvcr.io/nvidia/tao/tao-toolkit:5.5.0-pyt \
     python3 /workspace/pointpillars/scripts/dataset_convert.py \
         --config-path /workspace/pointpillars/config \

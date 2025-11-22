@@ -15,7 +15,7 @@ DATA_PATH="/workspace/data/your_data"
 RESULTS_DIR="/workspace/results/your_data_eval"
 
 # データ変換で作成した中間ファイル(.pkl)がある場所
-DATA_INFO_PATH="/workspace/convert_results/eval/data_info"
+DATA_INFO_PATH="/workspace/convert_result/eval/data_info"
 
 # ★評価したいモデルファイル(.tlt)のパス
 # 学習結果フォルダの中にある、最も性能が良かったエポックのファイルを指定します
@@ -44,8 +44,8 @@ docker run --rm --gpus all \
     --ipc=host \
     --ulimit memlock=-1 \
     --ulimit stack=67108864 \
-    -v /home/demulab-kohei/tao_project:/workspace \
-    -v /home/demulab-kohei/.ngc:/root/.ngc \
+    -v ${HOME}/tao_project:/workspace \
+    -v ${HOME}/.ngc:/root/.ngc \
     nvcr.io/nvidia/tao/tao-toolkit:5.5.0-pyt \
     python3 /workspace/pointpillars/scripts/evaluate.py \
         --config-path /workspace/pointpillars/config \

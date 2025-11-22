@@ -45,8 +45,8 @@ docker run --rm --gpus all \
     --ipc=host \
     --ulimit memlock=-1 \
     --ulimit stack=67108864 \
-    -v /home/demulab-kohei/tao_project:/workspace \
-    -v /home/demulab-kohei/.ngc:/root/.ngc \
+    -v ${HOME}/tao_project:/workspace \
+    -v ${HOME}/.ngc:/root/.ngc \
     nvcr.io/nvidia/tao/tao-toolkit:5.5.0-pyt \
     python3 /workspace/pointpillars/scripts/train.py \
         --config-path /workspace/pointpillars/config \
@@ -57,7 +57,7 @@ docker run --rm --gpus all \
         train.num_epochs=${EPOCHS} \
         train.batch_size=${BATCH_SIZE} \
         \
-        dataset.info_path='{train: [infos_train.pkl]}' \
+        dataset.info_path='{train: [infos_train.pkl], test: [infos_val.pkl]}' \
         dataset.data_split.train=training \
         \
         dataset.data_augmentor.disable_aug_list=[gt_sampling] \
