@@ -35,7 +35,7 @@ PC_RANGE='[-69.12, -39.68, -3, 69.12, 39.68, 1]'
 # ------------------------------------------------------------------------------
 
 # 途中から再開しますか？ ("true" または "false")
-RESUME="true"
+RESUME="false"
 
 # 再開に使用するチェックポイントのパス (RESUME="true" の時のみ使われます)
 RESUME_CHECKPOINT="/workspace/results/your_data_train/checkpoint_epoch_100.tlt"
