@@ -19,6 +19,11 @@ NVIDIA TAO Toolkitを使って、PointPillarsを学習させるためのリポ�
 git clone https://github.com/HappyYusuke/tao_project.git
 ```
 
+TensorBoardをインストール (学習曲線確認用)
+```bash
+pip install tensorboard
+```
+
 Dockerをインストール（インストールしている場合はスキップ）
 ```bash
 # 本リポジトリに移動
@@ -177,3 +182,13 @@ vim evaluate_in_container.sh
 ```bash
 ./stop_docker_compose.sh
 ```
+
+## Check the train graph
+ホストPCでtensorboardコマンドを使用します。
+```bash
+tensorboard --logdir ~/tao_project//results/your_data_train/ --port 6006
+```
+
+<br>
+
+ブラウザを開き、アドレスバーに`http://localhost:6006`を入力し検索するとグラフを確認できます。
