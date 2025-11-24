@@ -151,6 +151,10 @@ vim train_in_container.sh
 ./stop_docker_compose.sh
 ```
 
+> [!TIP]
+> 途中から学習する場合は、`RESUME="true"`にし、`EPOCHS`を学習させたい数にしてください。<br>
+> 例：`EPOCHS=100`まで学習し、300まで学習したい場合は`EPOCHS=300`で残り200学習する。
+
 <br>
 
 ## Evaluate
