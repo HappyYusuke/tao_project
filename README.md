@@ -194,3 +194,15 @@ tensorboard --logdir ~/tao_project//results/your_data_train/ --port 6006
 <br>
 
 ブラウザを開き、アドレスバーに`http://localhost:6006`を入力し検索するとグラフを確認できます。
+
+<br>
+
+## Export train results
+学習結果のファイルを`onnx`へ変換します (必要な場合のみ)。
+```bash
+# Dockerを起動
+./run_docker_compose.sh
+
+# export
+./export_in_container.sh
+```
