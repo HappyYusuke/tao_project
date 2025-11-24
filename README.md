@@ -183,6 +183,8 @@ vim evaluate_in_container.sh
 ./stop_docker_compose.sh
 ```
 
+<br>
+
 ## Check the train graph
 ホストPCでtensorboardコマンドを使用します。
 ```bash
