@@ -37,8 +37,8 @@ docker run --rm --gpus all \
     --ipc=host \
     --ulimit memlock=-1 \
     --ulimit stack=67108864 \
-    -v /home/demulab/tao_project:/workspace \
-    -v /home/demulab/.ngc:/root/.ngc \
+    -v ${HOME}/tao_project:/workspace \
+    -v ${HOME}/.ngc:/root/.ngc \
     nvcr.io/nvidia/tao/tao-toolkit:5.5.0-pyt \
     python3 /workspace/pointpillars/scripts/export.py \
         --config-path /workspace/pointpillars/config \
