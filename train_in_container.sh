@@ -17,6 +17,9 @@ RESULTS_DIR="/workspace/results/your_data_train"
 # データ変換で作成した中間ファイル(.pkl)がある場所
 DATA_INFO_PATH="/workspace/convert_result/train/data_info"
 
+# configファイル名 (歩行者のみ学習したい場合: pedestrian_config)
+CONFIG_NAME="default_config"
+
 # ------------------------------------------------------------------------------
 # 2. 学習パラメータ設定
 # ------------------------------------------------------------------------------
@@ -71,12 +74,12 @@ docker run --rm --gpus all \
     --ipc=host \
     --ulimit memlock=-1 \
     --ulimit stack=67108864 \
-    -v /home/demulab/tao_project:/workspace \
-    -v /home/demulab/.ngc:/root/.ngc \
+    -v ${HOME}/tao_project:/workspace \
+    -v ${HOME}/.ngc:/root/.ngc \
     nvcr.io/nvidia/tao/tao-toolkit:5.5.0-pyt \
     python3 /workspace/pointpillars/scripts/train.py \
         --config-path /workspace/pointpillars/config \
-        --config-name default_config \
+        --config-name ${CONFIG_NAME} \
         results_dir=${RESULTS_DIR} \
         dataset.data_info_path=${DATA_INFO_PATH} \
         dataset.data_path=${DATA_PATH} \
