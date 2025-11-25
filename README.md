@@ -151,6 +151,10 @@ vim train_in_container.sh
 ./stop_docker_compose.sh
 ```
 
+> [!TIP]
+> 途中から学習する場合は、`RESUME="true"`にし、`EPOCHS`を学習させたい数にしてください。<br>
+> 例：`EPOCHS=100`まで学習し、300まで学習したい場合は`EPOCHS=300`で残り200学習する。
+
 <br>
 
 ## Evaluate
@@ -194,3 +198,15 @@ tensorboard --logdir ~/tao_project//results/your_data_train/ --port 6006
 <br>
 
 ブラウザを開き、アドレスバーに`http://localhost:6006`を入力し検索するとグラフを確認できます。
+
+<br>
+
+## Export train results
+学習結果のファイルを`onnx`へ変換します (必要な場合のみ)。
+```bash
+# Dockerを起動
+./run_docker_compose.sh
+
+# export
+./export_in_container.sh
+```
