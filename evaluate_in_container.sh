@@ -44,8 +44,8 @@ docker run --rm --gpus all \
     --ipc=host \
     --ulimit memlock=-1 \
     --ulimit stack=67108864 \
-    -v ${HOME}/tao_project:/workspace \
-    -v ${HOME}/.ngc:/root/.ngc \
+    -v ${HOST_HOME}/tao_project:/workspace \
+    -v ${HOST_HOME}/.ngc:/root/.ngc \
     nvcr.io/nvidia/tao/tao-toolkit:5.5.0-pyt \
     python3 /workspace/pointpillars/scripts/evaluate.py \
         --config-path /workspace/pointpillars/config \
