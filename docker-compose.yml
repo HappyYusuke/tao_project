@@ -6,6 +6,10 @@ services:
     build: .
     container_name: tao_dev_container
     
+    # Docker out of DockerでホストPCのホームまでのパスを使用するため環境変数を追加
+    environment:
+      - HOST_HOME=${HOME}
+
     # DooDを実現するための最も重要な設定
     # ホストのDockerソケットをコンテナ内にマウントします
     volumes:
