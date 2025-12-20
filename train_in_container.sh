@@ -34,6 +34,9 @@ BATCH_SIZE=8
 # 点群の座標範囲
 PC_RANGE='[-69.12, -39.68, -3, 69.12, 39.68, 1]'
 
+# 保存する重みファイルの数
+SAVE_NUM=250
+
 # ------------------------------------------------------------------------------
 # 3. Resume (再開) 設定 
 # ------------------------------------------------------------------------------
@@ -98,5 +101,7 @@ docker run --rm --gpus all \
         dataset.data_split='{train: train, test: val}' \
         dataset.point_cloud_range=\"${PC_RANGE}\" \
         ${RESUME_ARG} \
-        train.max_checkpoint_save_num=250 \
-        key=nvidia_tao"
+        \
+        train.max_checkpoint_save_num=${SAVE_NUM}
+        \
+        key=nvidia_tao
