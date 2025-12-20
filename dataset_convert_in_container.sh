@@ -9,7 +9,7 @@
 # ------------------------------------------------------------------------------
 
 # 変換元のデータセットがある親フォルダ
-DATA_PATH="/workspace/data/your_data"
+DATA_PATH="/workspace/data/your/dataset"
 
 # 変換結果(.pklファイル)の保存先
 RESULTS_DIR="/workspace/convert_result/train"

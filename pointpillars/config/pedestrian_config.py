@@ -395,7 +395,21 @@ class PPDataAugmentorConfig:
         description="List of disabled augmentations"
     )
     aug_config_list: Optional[List[Any]] = LIST_FIELD(
-        arrList=[{"db_info_path": ["dbinfos_train.pkl"], "disable_with_fake_lidar": False, "limit_whole_scene": False, "name": "gt_sampling", "num_point_features": 4, "preface": {"filter_by_min_points": ["Car:5", "Pedestrian:5", "Cyclist:5"]}, "remove_extra_width": [0.0, 0.0, 0.0], "sample_groups": ["Car:15", "Pedestrian:15", "Cyclist:15"]}],
+        arrList=[{
+            "db_info_path": ["dbinfos_train.pkl"], 
+            "disable_with_fake_lidar": False, 
+            "limit_whole_scene": False, 
+            "name": "gt_sampling", 
+            "num_point_features": 4, 
+            
+            # 修正箇所 1: フィルタリング設定
+            "preface": {"filter_by_min_points": ["Pedestrian:5"]}, 
+            
+            "remove_extra_width": [0.0, 0.0, 0.0], 
+            
+            # 修正箇所 2: サンプリング数
+            "sample_groups": ["Pedestrian:15"] 
+        }],
         display_name="aug_config_list",
         description="List of configurations of augmentations."
     )

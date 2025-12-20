@@ -9,23 +9,24 @@
 # ------------------------------------------------------------------------------
 
 # 学習データの元フォルダ
-DATA_PATH="/workspace/data/ReidPillar-HF"
+DATA_PATH="/workspace/data/your/dataset"
 
 # 学習結果の保存先 
-RESULTS_DIR="/workspace/results/your_data_train"
+RESULTS_DIR="/workspace/results/train"
 
 # データ変換で作成した中間ファイル(.pkl)がある場所
 DATA_INFO_PATH="/workspace/convert_result/train/data_info"
 
-# configファイル名 (歩行者のみ学習したい場合: pedestrian_config)
-CONFIG_NAME="default_config"
+# default_config.py: Car, Pedestrian, Cyclist
+# pedestrian_config.py: Pedestrian
+CONFIG_FILE="pedestrian_config.py"
 
 # ------------------------------------------------------------------------------
 # 2. 学習パラメータ設定
 # ------------------------------------------------------------------------------
 
 # エポック数
-EPOCHS=300
+EPOCHS=500
 
 # バッチサイズ
 BATCH_SIZE=8
@@ -70,29 +71,32 @@ echo "Starting training..."
 echo "DATA: $DATA_PATH"
 echo "SAVE: $RESULTS_DIR"
 
+# ★修正ポイント:
+# 1. 失敗していた -v (単体ファイルマウント) を削除
+# 2. /bin/bash -c "..." を使い、コンテナ内で cp コマンドを実行してから学習を開始する
+
 docker run --rm --gpus all \
     --ipc=host \
     --ulimit memlock=-1 \
     --ulimit stack=67108864 \
     -v ${HOST_HOME}/tao_project:/workspace \
     -v ${HOST_HOME}/.ngc:/root/.ngc \
+    \
     nvcr.io/nvidia/tao/tao-toolkit:5.5.0-pyt \
+    \
+    /bin/bash -c " \
+    cp /workspace/pointpillars/config/${CONFIG_FILE} /usr/local/lib/python3.10/dist-packages/nvidia_tao_pytorch/pointcloud/pointpillars/config/default_config.py && \
     python3 /workspace/pointpillars/scripts/train.py \
         --config-path /workspace/pointpillars/config \
-        --config-name ${CONFIG_NAME} \
+        --config-name default_config \
         results_dir=${RESULTS_DIR} \
         dataset.data_info_path=${DATA_INFO_PATH} \
         dataset.data_path=${DATA_PATH} \
         train.num_epochs=${EPOCHS} \
         train.batch_size=${BATCH_SIZE} \
-        \
         dataset.info_path='{train: [infos_train.pkl], test: [infos_val.pkl]}' \
         dataset.data_split='{train: train, test: val}' \
-        \
-        dataset.data_augmentor.disable_aug_list=[gt_sampling] \
-        \
-        dataset.point_cloud_range="${PC_RANGE}" \
-        \
+        dataset.point_cloud_range=\"${PC_RANGE}\" \
         ${RESUME_ARG} \
-        \
-        key=nvidia_tao
+        train.max_checkpoint_save_num=250 \
+        key=nvidia_tao"
