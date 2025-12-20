@@ -166,7 +166,7 @@ vim dataset_convert_val.sh
 
 NVIDIA TAO Toolkitで検証できるようにデータセットを変換。
 ```bash
-./dataset_convert_in_val.sh
+./dataset_convert_val.sh
 ```
 
 <br>
