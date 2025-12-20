@@ -25,6 +25,9 @@ CONFIG_FILE="pedestrian_config.py"
 # 2. 学習パラメータ設定
 # ------------------------------------------------------------------------------
 
+# 使用するGPUの枚数
+NUM_GPUS=2
+
 # エポック数
 EPOCHS=500
 
@@ -89,19 +92,18 @@ docker run --rm --gpus all \
     \
     /bin/bash -c " \
     cp /workspace/pointpillars/config/${CONFIG_FILE} /usr/local/lib/python3.10/dist-packages/nvidia_tao_pytorch/pointcloud/pointpillars/config/default_config.py && \
-    python3 /workspace/pointpillars/scripts/train.py \
+    torchrun --nproc_per_node=${NUM_GPUS} /workspace/pointpillars/scripts/train.py \
         --config-path /workspace/pointpillars/config \
         --config-name default_config \
         results_dir=${RESULTS_DIR} \
         dataset.data_info_path=${DATA_INFO_PATH} \
         dataset.data_path=${DATA_PATH} \
         train.num_epochs=${EPOCHS} \
+        train.num_gpus=${NUM_GPUS} \
         train.batch_size=${BATCH_SIZE} \
         dataset.info_path='{train: [infos_train.pkl], test: [infos_val.pkl]}' \
         dataset.data_split='{train: train, test: val}' \
         dataset.point_cloud_range=\"${PC_RANGE}\" \
+        train.max_checkpoint_save_num=${SAVE_NUM} \
         ${RESUME_ARG} \
-        \
-        train.max_checkpoint_save_num=${SAVE_NUM}
-        \
-        key=nvidia_tao
+        key=nvidia_tao"
